@@ -1,0 +1,28 @@
+{
+  "name": "gympass-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node build/server.js",
+    "build": "tsup src --out-dir build",
+    "migrate": "npx prisma migrate dev",
+    "studio": "npx prisma studio"
+  },
+  "devDependencies": {
+    "@rocketseat/eslint-config": "2.2.2",
+    "@types/node": "^22.8.1",
+    "eslint": "9.13.0",
+    "prisma": "5.21.1",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@prisma/client": "5.21.1",
+    "dotenv": "16.4.5",
+    "fastify": "^5.0.0",
+    "zod": "3.23.8"
+  }
+}
