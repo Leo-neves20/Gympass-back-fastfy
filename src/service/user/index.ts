@@ -1,0 +1,1 @@
+export {UsersRegister} from './_register.service'

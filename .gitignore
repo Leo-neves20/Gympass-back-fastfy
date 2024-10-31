@@ -1,4 +1,4 @@
 node_module
 build
-env
+.env
 node_modules
