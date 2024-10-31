@@ -1,0 +1,1 @@
+export {prismaClient} from './_prisma-client'

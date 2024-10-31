@@ -1,0 +1,1 @@
+export {userRoutesResgistry} from './_user.routes'

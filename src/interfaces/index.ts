@@ -1,0 +1,1 @@
+export * as useInterface from './_users.interface'
