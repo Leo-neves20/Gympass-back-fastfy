@@ -19,7 +19,7 @@ export class RegisterErrors implements iRegisterErros {
         const user = await this.UserRepository.GetByEmail({email})
         
         if(user){
-            throw new AppError('user already existe', 409)
+            throw new AppError('email already taken', 409)
         }
     }
     
