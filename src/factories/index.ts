@@ -1,0 +1,1 @@
+export {MakeRegister} from './_make-register'

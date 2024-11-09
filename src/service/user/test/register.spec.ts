@@ -1,11 +1,19 @@
-import {expect, describe, it} from 'vitest'
+import {expect, describe, it, beforeEach} from 'vitest'
 import {InMemoryUserRepository} from '@/repository/in-memory'
 import { iRegisterRequest } from '@/interfaces/_users.interface'
 import { UsersRegister } from '../_register.service'
 import { AppError } from '@/errors'
 import { compare } from 'bcrypt'
 
+
+let UserRepository: InMemoryUserRepository
+let sut: UsersRegister
+
 describe('User register', () => {
+    beforeEach(() => {
+        UserRepository = new InMemoryUserRepository()
+        sut = new UsersRegister(UserRepository)
+    })
 
     const userMock: iRegisterRequest = {
         name: 'leo',
@@ -14,40 +22,25 @@ describe('User register', () => {
     }
 
     it('shold create a user', async () =>{
-        const UserRepository = new InMemoryUserRepository()
-        const RegisterUser = new UsersRegister(UserRepository)
-        const user = await RegisterUser.execute(userMock)
-
+        const user = await sut.execute(userMock)
         expect(user.id).toEqual(expect.any(String))
     })
 
     it('should not create a user with email already taken', async () =>{
-        const UserRepository = new InMemoryUserRepository()
-        const RegisterUser = new UsersRegister(UserRepository)
-        await RegisterUser.execute(userMock)
-
-        await expect(() => 
-            RegisterUser.execute(userMock)
+        await sut.execute(userMock)
+        await expect(
+            sut.execute(userMock)
         ).rejects.toBeInstanceOf(AppError)
     })
 
     it('shold not create a user password without containing 5 characters, containing at least one uppercase letter, one number and one special character', async () =>{
-        const UserRepository = new InMemoryUserRepository()
-        const RegisterUser = new UsersRegister(UserRepository)
-     
         await expect(() => 
-            RegisterUser.execute({...userMock, password: 'leo123'})
+            sut.execute({...userMock, password: 'leo123'})
         ).rejects.toBeInstanceOf(AppError)
     })
 
     it('shold not create a user password without hashed', async () =>{
-        const UserRepository = new InMemoryUserRepository()
-        const RegisterUser = new UsersRegister(UserRepository)
-        const user = await RegisterUser.execute(userMock)
-
-        const isPasswordHashed = await compare(userMock.password, user.password_hash)
-
-        expect(isPasswordHashed).toBe(true)
+        const user = await sut.execute(userMock)
+        await expect(compare(userMock.password, user.password_hash)).resolves.toEqual(true)
     })
-
 })
