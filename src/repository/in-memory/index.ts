@@ -1,0 +1,1 @@
+export {InMemoryUserRepository} from "./_user-repository"

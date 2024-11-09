@@ -1,5 +1,5 @@
-import {Prisma} from "@prisma/client"
+import type {User} from "@prisma/client"
 
-export interface iRegisterRequest extends Pick<Prisma.UserCreateInput, 'name' | 'email'> {
+export interface iRegisterRequest extends Pick<User, 'name' | 'email'> {
     password: string
 }
