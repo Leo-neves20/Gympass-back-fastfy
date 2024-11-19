@@ -7,11 +7,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ThemeType {
+  LIGHT
+  DARK
+  AUTO
+}
+
+enum LangType {
+  PT_BR
+  EN_US
+}
+
 model User {
   id            String    @id @default(uuid())
   name          String?
   email         String    @unique
   password_hash String
+  theme         ThemeType @default(AUTO)
+  lang          LangType  @default(EN_US)
   created_at    DateTime  @default(now())
   Checkin       Checkin[]
 

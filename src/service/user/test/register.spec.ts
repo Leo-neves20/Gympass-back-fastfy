@@ -1,18 +1,18 @@
 import {expect, describe, it, beforeEach} from 'vitest'
 import {InMemoryUserRepository} from '@/repository/in-memory'
 import { iRegisterRequest } from '@/interfaces/_users.interface'
-import { UsersRegister } from '../_register.service'
+import { UsersRegisterService } from '../_register.service'
 import { AppError } from '@/errors'
 import { compare } from 'bcrypt'
 
 
 let UserRepository: InMemoryUserRepository
-let sut: UsersRegister
+let sut: UsersRegisterService
 
 describe('User register', () => {
     beforeEach(() => {
         UserRepository = new InMemoryUserRepository()
-        sut = new UsersRegister(UserRepository)
+        sut = new UsersRegisterService(UserRepository)
     })
 
     const userMock: iRegisterRequest = {

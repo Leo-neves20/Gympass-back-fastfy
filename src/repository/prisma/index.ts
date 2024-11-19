@@ -1,1 +1,1 @@
-export {UserRepository} from './_prisma-user.repository'
+export {UserRepository} from './user'

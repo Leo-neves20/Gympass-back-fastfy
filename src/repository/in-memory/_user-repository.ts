@@ -2,7 +2,6 @@ import { iRegisterRequest } from '@/interfaces/_users.interface';
 import { Prisma, type User } from '@prisma/client';
 import {UserRepository} from '../prisma/_prisma-user.repository'
 import {v4 as uuid} from 'uuid'
-import { hash } from 'bcrypt';
 
 export class InMemoryUserRepository implements UserRepository {
 
@@ -28,11 +27,13 @@ export class InMemoryUserRepository implements UserRepository {
         const {email} = data
         const user = this.dataBase.find(user => user.email === email)
 
-        if(!user){
-            return null
-        }
-
-        return new Promise((resolve) => resolve(user)) 
+        return !user ? null : new Promise((resolve) => resolve(user)) 
     }
 
+    async GetById(params: { id: string; }): Promise<User | null> {
+        const {id} = params
+        const user = this.dataBase.find(user => user.id === id)
+
+        return !user ? null : new Promise((resolve) => resolve(user)) 
+    }
 }
