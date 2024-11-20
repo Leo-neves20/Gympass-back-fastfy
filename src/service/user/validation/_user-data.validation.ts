@@ -18,12 +18,12 @@ class UserDataExist implements iUserDataExist {
     }
 
     async isUserId(id: string){
-        const user = await this.UserRepository.GetById({id})
+        const user = await this.UserRepository.GetById(id)
         return user ? true : false
     }
 
     async isEmail(email: string){
-        const user = await this.UserRepository.GetByEmail({email})
+        const user = await this.UserRepository.GetByEmail(email)
         return user ? true : false 
     }
 

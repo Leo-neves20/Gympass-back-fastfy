@@ -1,5 +1,4 @@
 import { InMemoryUserRepository } from "@/repository/in-memory";
-
 import { beforeEach, describe, expect, it } from "vitest";
 import { UserService } from "../_user.service";
 import { AppError } from "@/errors";

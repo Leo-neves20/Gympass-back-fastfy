@@ -14,7 +14,7 @@ export class UserService implements iUserService {
         const userValidations = new UserDataValidation(this.UserRepository)
         await userValidations.ById(userId)
         
-        const user = await this.UserRepository.GetById({id: userId}) as User
+        const user = await this.UserRepository.GetById(userId) as User
 
         return user 
     }

@@ -10,7 +10,7 @@ export class SigninService {
 
         const validation = new SigninError(this.UserRepository)
 
-        const user = await validation.emailValidation({email})
+        const user = await validation.emailValidation(email)
         await validation.passwordValidation({password, password_hash: user.password_hash})
 
         return user

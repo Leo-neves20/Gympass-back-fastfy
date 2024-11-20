@@ -4,14 +4,13 @@ import { Prisma, type User } from "@prisma/client"
 type Class = new (...args: any[]) => any
 
 interface iGET {
-    GetByEmail(data: Pick<Prisma.UserCreateInput, "email">): Promise<User | null>
-    GetById(params: {id: string}): Promise<User | null>
+    GetByEmail(email: string): Promise<User | null>
+    GetById(id: string): Promise<User | null>
 }
 
-export const GetMexing = <Base extends Class>(base: Base) => class GET extends base implements iGET {
+export const GetMixin = <Base extends Class>(base: Base) => class GET extends base implements iGET {
 
-    async GetByEmail(data: Pick<Prisma.UserCreateInput, "email">){
-        const {email} = data
+    async GetByEmail(email: string){
         const response = await prismaClient.user.findUnique({
             where: {
                 email
@@ -20,8 +19,7 @@ export const GetMexing = <Base extends Class>(base: Base) => class GET extends b
         return response
     }
 
-    async GetById(params: {id: string}){
-        const {id} = params
+    async GetById(id: string){
         const response = await prismaClient.user.findUnique({
             where: {
                 id

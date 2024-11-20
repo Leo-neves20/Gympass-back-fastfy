@@ -7,10 +7,9 @@ import { compare } from "bcrypt";
 export class SigninError {
     constructor(private UserRepository: UserRepository){}
 
-    async emailValidation(params:{email: string} ): Promise<User>{
-        const {email} = params
+    async emailValidation(email: string): Promise<User>{
         const UserRepository = this.UserRepository
-        const user = await UserRepository.GetByEmail({email: email})
+        const user = await UserRepository.GetByEmail(email)
 
         if(!user){
             throw new AppError('email ou password wrong')

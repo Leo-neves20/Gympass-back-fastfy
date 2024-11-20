@@ -39,13 +39,13 @@ model Checkin {
   user    User   @relation(fields: [user_Id], references: [id])
   user_Id String
 
-  gyn    Gyn    @relation(fields: [gyn_Id], references: [id])
+  gyn    Gym    @relation(fields: [gyn_Id], references: [id])
   gyn_Id String
 
   @@map("check_in")
 }
 
-model Gyn {
+model Gym {
   id          String    @id @default(uuid())
   title       String
   description String?

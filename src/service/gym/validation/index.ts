@@ -1,0 +1,1 @@
+export {GymDataValidation} from './_gym-data.validation'
